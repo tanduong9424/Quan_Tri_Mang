@@ -1,3 +1,5 @@
+Tải ISO CentOS tại **http://centos-hcm.viettelidc.com.vn/7/isos/x86_64/**
+
 Cấu hình lại để update, cài đặt các gói cần thiết
 ```gedit /etc/yum.repos.d/CentOS-Base.repo```
 * Uncomment các dòng bắt đầu bằng #baseurl -> baseurl
