@@ -1,13 +1,3 @@
-TEST 
-# Tài liệu chính
-
-- [VPN GRE + IPSec](./8 Docker/README.md)
-- [Cấu hình OSPF](./OSPF/README.md)
-- [Cấu hình IPSec](./IPSec/README.md)
-
-
-
-
 Tải ISO CentOS tại **http://centos-hcm.viettelidc.com.vn/7/isos/x86_64/**
 
 Cấu hình lại để update, cài đặt các gói cần thiết
