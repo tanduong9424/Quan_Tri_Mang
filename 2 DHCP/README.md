@@ -1,10 +1,12 @@
-cấu hình dhcp
-khi cài dhcp xong thì copy file cấu hình mẫu sang /etc/dhcpd.conf để cấu hình
-cp /usr/share/doc/dhcp-4.2.5/dhcpd.conf.example /etc/dhcp/dhcpd.conf
-chỉnh ip tĩnh 192.168.1.1
+# Cấu hình DHCP
+- Khi cài dhcp xong thì copy file cấu hình mẫu sang **/etc/dhcpd.conf** để cấu hình
+
+``cp /usr/share/doc/dhcp-4.2.5/dhcpd.conf.example /etc/dhcp/dhcpd.conf``
+
+- Chỉnh ip tĩnh 192.168.1.1
 sửa ```/etc/dhcp/dhcpd.conf```
-# A slightly different configuration for an internal subnet.
-cấp từ 192.168.1.10 đến 192.168.1.100
+
+Cấp từ 192.168.1.10 đến 192.168.1.100
 ```
     subnet 192.168.1.0 netmask 255.255.255.0 {
     range 192.168.1.10 192.168.1.100;
@@ -17,4 +19,4 @@ cấp từ 192.168.1.10 đến 192.168.1.100
     max-lease-time 7200; #thời gian cho thuê tối đa
 } 
 ```
-rồi restart với enable dhcpd
+rồi **restart** với **enable dhcpd**

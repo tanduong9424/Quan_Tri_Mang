@@ -26,28 +26,28 @@ sudo systemctl enable dnsmasq
 /var/named/sgu.edu.vn.zone
 
 /var/named/reverse.192.168.1.0
-
-
-
+```
 ```
 $TTL 1d
-@    IN    SOA    ns1.1google.com. root.1google.com. (
-        2024091801  ; Serial
-        604800      ; Refresh
-        7200        ; Retry
-        2419200     ; Expire
-        86400       ; Minimum TTL
-);
-@    IN  NS    ns1.1google.com.
-2    IN  PTR   1google.com.
-2    IN  PTR   1youtube.com
-2    IN  PTR   1facebook.com
-2    IN  PTR   1tuilanumberone.com
+  @    IN    SOA    ns1.1google.com. root.1google.com. (
+          2024091801  ; Serial
+          604800      ; Refresh
+          7200        ; Retry
+          2419200     ; Expire
+          86400       ; Minimum TTL
+  );
+  @    IN  NS    ns1.1google.com.
+  2    IN  PTR   1google.com.
+  2    IN  PTR   1youtube.com
+  2    IN  PTR   1facebook.com
+  2    IN  PTR   1tuilanumberone.com
 
-2    IN  PTR   ns1.1google.com.
-2    IN  PTR   ns1.1youtube.com
-2    IN  PTR   ns1.1facebook.com
-2    IN  PTR   ns1.1tuilanumberone.com
+  2    IN  PTR   ns1.1google.com.
+  2    IN  PTR   ns1.1youtube.com
+  2    IN  PTR   ns1.1facebook.com
+  2    IN  PTR   ns1.1tuilanumberone.com
+```
+
 ```
 sudo named-checkzone sgu.edu.vn /var/named/HuynhTanDuong.edu.vn.zone
 ```
@@ -65,8 +65,8 @@ $TTL 86400
 @    IN  A     192.168.1.61
 server  IN  A     192.168.1.61
 ```
+
 ```
-------------------------------------------------------------------
 $TTL 86400
 @    IN    SOA    server.HuynhTanDuong.edu.vn. root.HuynhTanDuong.edu.vn. (
         2011071001 ; Serial
@@ -80,7 +80,7 @@ $TTL 86400
 1    IN  PTR   HuynhTanDuong.edu.vn. 
 ```
 
-sudo lsof -i :53
+**sudo lsof -i :53**
 
 kiểm tra
 ```
@@ -89,17 +89,19 @@ kiểm tra
 /var/named/forward.HuynhTanDuong.edu.vn
 /var/named/reverse.192.168.1.0
 ```
---------------------------------------------------------------------
-forwarders
-```nano /etc/named.conf thêm forwarders {192.168.1.61;};```
-tắt dnssec-enable và dnssec-validation thành no ,tắt selinux luôn trong nano /etc/sysconfig/selinux
-systemctl restart named
---------------------------------------------------------------------
-backups
-trong /etc/named.conf thêm trên  máy gốc thêm ```allow-transfer {192.168.1.61;}```
-trong /var/named/forward.sgu.edu.vn  và /var/named/reverse.192.168.1.0 thêm zone secondary
 
-trên máy backup trong /etc/named.conf them allow-transfer...
+#Forwarders
+
+``nano /etc/named.conf``
+ thêm forwarders {192.168.1.61;};
+- Tắt **dnssec-enable** và **dnssec-validation** thành no, tắt selinux luôn trong nano /etc/sysconfig/selinux
+- ``systemctl restart named``
+
+# Backups
+- Trong /etc/named.conf thêm trên  máy gốc thêm ``allow-transfer {192.168.1.61;}``
+- Trong /var/named/forward.sgu.edu.vn  và /var/named/reverse.192.168.1.0 thêm zone secondary
+
+- Trên máy backup trong /etc/named.conf them allow-transfer...
 thêm 2 zone dưới vào  /etc/named.rfc1912.zones( chú ý nếu 1.168.192.in-addr.arpa đã tồn tại thì xóa đi r tạo cái khác)
 ```
 zone "HuynhTanDuong.edu.vn" IN {
@@ -114,7 +116,7 @@ zone "1.168.192.in-addr.arpa" IN {
   master {192.168.1.61;};
 };
 ```
-xong thì các file backup sẽ nằm ở /var/named/slaves
+- Xong thì các file backup sẽ nằm ở /**var/named/slaves**
 
 ```
 $TTL 1d

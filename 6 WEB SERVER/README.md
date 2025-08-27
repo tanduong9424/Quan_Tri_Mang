@@ -1,20 +1,25 @@
-* /var/named/htd.edu.vn.zone
-* /var/named/sgu.edu.vn.zone
-* mkdir -p /var/www/html/htd.edu.vn
-* mkdir -p /var/www/html/sgu.edu.vn
-* chown -R apache:apache /var/www/html/htd.edu.vn
-* chown -R apache:apache /var/www/html/sgu.edu.vn
-* chmod 755 /var/www
-* chmod 755 /var/www/html
+ 
+	/var/named/htd.edu.vn.zone
+	/var/named/sgu.edu.vn.zone
+	mkdir -p /var/www/html/htd.edu.vn
+	mkdir -p /var/www/html/sgu.edu.vn
+	chown -R apache:apache /var/www/html/htd.edu.vn
+	chown -R apache:apache /var/www/html/sgu.edu.vn
+	chmod 755 /var/www
+	chmod 755 /var/www/html
 
-nano /etc/httpd/conf/httpd.conf
+
+
+``nano /etc/httpd/conf/httpd.conf``
+
 thêm vào 
+
 ```
 IncludeOptional conf.d/*.conf
 NameVirtualHost *:80
 ```
 
-nano /etc/httpd/conf.d/htd.edu.vn.conf
+``nano /etc/httpd/conf.d/htd.edu.vn.conf``
 ```
 <VirtualHost *:80>
 	ServerAdmin webmaster@htd.edu.vn
@@ -24,7 +29,7 @@ nano /etc/httpd/conf.d/htd.edu.vn.conf
 </VirtualHost>
 ```
 
-nano /etc/httpd/conf.d/sgu.edu.vn.conf
+``nano /etc/httpd/conf.d/sgu.edu.vn.conf``
 ```
 <VirtualHost *:80>
 	ServerAdmin webmaster@sgu.edu.vn
@@ -34,15 +39,15 @@ nano /etc/httpd/conf.d/sgu.edu.vn.conf
 </VirtualHost>
 ```
 
-* nano /var/www/html/htd.edu.vn/index.html
-* nano /var/www/html/sgu.edu.vn/index.html
+	nano /var/www/html/htd.edu.vn/index.html
+	nano /var/www/html/sgu.edu.vn/index.html
 
-* chmod +x /var/www/html/htd.edu.vn/index.html
-* chmod +x /var/www/html/sgu.edu.vn/index.html
+	chmod +x /var/www/html/htd.edu.vn/index.html
+	chmod +x /var/www/html/sgu.edu.vn/index.html
 
-* systemctl enable httpd
-* systemctl start httpd
-* systemctl restart httpd
+	systemctl enable httpd
+	systemctl start httpd
+	systemctl restart httpd
 
 
 cấu hình file index khác vị trí mặc định /var/...

@@ -1,7 +1,8 @@
 Cấu hình lên DC bằng samba
-sudo lsof -i :53
+``sudo lsof -i :53``
 
-```gedit /etc/samba/smb.conf```
+``gedit /etc/samba/smb.conf``
+
 ```
 ------------------------------
 # See smb.conf.example for a more detailed config file or
