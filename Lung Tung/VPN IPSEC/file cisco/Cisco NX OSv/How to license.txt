@@ -1,9 +1,0 @@
-1) Enable grace period (120 days)
-
-conf t 
-license grace-period
-
-2) Enable required feature
-
-conf t 
-feature ospf

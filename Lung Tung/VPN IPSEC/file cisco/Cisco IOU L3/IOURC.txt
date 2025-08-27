@@ -1,2 +1,0 @@
-[license]
-localhost.localdomain = 73635fd3b0a13ad0;
