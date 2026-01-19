@@ -110,12 +110,12 @@ Ngrok dùng để deploy tạm tời sản phẩm, đến khách hàng người 
 Truy cập ``https://dashboard.ngrok.com/get-started/your-authtoken`` và tạo tài khoản để lấy mã xác thực và thêm vào cấu hình Ngrok trong máy cần cài.
 
     ngrok config add-authtoken 31eR31eRxxxxxxxxxxxxxxxxxxxxxxxxxHfR7QXyKUN8j1ry
-Chạy Container
+## Chạy Container
 
     docker run -p  5000:8000 test-docker
     Hoặc
     docker compose up --build
-Dùng Ngrok
+## Dùng Ngrok
 
     ngrok http 8000
 
