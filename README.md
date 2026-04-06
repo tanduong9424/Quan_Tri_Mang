@@ -1,6 +1,6 @@
-Tải ISO CentOS tại **http://centos-hcm.viettelidc.com.vn/7/isos/x86_64/**
+# Tải ISO CentOS tại **http://centos-hcm.viettelidc.com.vn/7/isos/x86_64/**
 
-Cấu hình lại để update, cài đặt các gói cần thiết
+# Cấu hình lại để update, cài đặt các gói cần thiết
 ```gedit /etc/yum.repos.d/CentOS-Base.repo```
 * Uncomment các dòng bắt đầu bằng #baseurl -> baseurl
 * Thay đổi đường dẫn từ ```http://mirrorlist.centos.org``` -> ````https://vault.centos.org````
@@ -55,21 +55,19 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
 
 ```
 
----------------------------------------------------------------------------------------------
-Tắt tường lửa
+# Tắt tường lửa
 ```
 systemctl stop firewalld
 systemctl disable firewalld
 ```
----------------------------------------------------------------------------------------------
-Tắt SeLinux
+
+# Tắt SeLinux
 
 ```gedit /etc/selinux/config```
 ```SELINUX=enforcing``` ->  ```SELINUX=disabled```
 ```sudo reboot```
 
----------------------------------------------------------------------------------------------
-Mount share folder giữa máy thật và ảo
+# Mount share folder giữa máy thật và ảo
 ```vmware-hgfsclient```
 
 ```sudo vmhgfs-fuse .host:/shareCetOS /home/node2/Desktop/sharefolderWin -o allow_other -o uid=1000```
@@ -79,10 +77,33 @@ Mount share folder giữa máy thật và ảo
 
 ```gedit /etc/fstab```
 
-
-
-thêm dòng sau vào
+Thêm dòng sau vào
 ```.host:/shareCetOS   /home/node1/Desktop/sharefolderWin    fuse.vmhgfs-fuse    defaults,allow_other,uid=1000     0    0```
+
+# Cấu hình khi CentOS bị mất, lỗi card mạng:
+```sudo gedit /etc/sysconfig/network-scripts/ifcfg-ens33```
+Xóa 2 dòng này nếu có
+* HWADDR=
+* UUID=
+Và đảm bảo 3 dòng này có đúng giá trị
+* BOOTPROTO=dhcp
+* ONBOOT=yes
+* NM_CONTROLLED=yes
+Save và chạy lệnh
+Tắt dịch vụ network cũ (tránh xung đột)
+```sudo systemctl stop network```
+```sudo systemctl disable network```
+
+Bật và khởi động lại NetworkManager
+```sudo systemctl enable NetworkManager```
+```sudo systemctl restart NetworkManager```
+
+Ép NetworkManager nhận lại card mạng
+```sudo nmcli networking off```
+```sudo nmcli networking on```
+
+
+
 
 ```sudo lsof -i :80```
 
