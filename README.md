@@ -1,4 +1,5 @@
-# Tải ISO CentOS tại **http://centos-hcm.viettelidc.com.vn/7/isos/x86_64/**
+# Tải ISO CentOS
+Tại **http://centos-hcm.viettelidc.com.vn/7/isos/x86_64/**
 
 # Cấu hình lại để update, cài đặt các gói cần thiết
 ```gedit /etc/yum.repos.d/CentOS-Base.repo```
@@ -91,15 +92,21 @@ Và đảm bảo 3 dòng này có đúng giá trị
 * NM_CONTROLLED=yes
 Save và chạy lệnh
 Tắt dịch vụ network cũ (tránh xung đột)
+
 ```sudo systemctl stop network```
+
 ```sudo systemctl disable network```
 
 Bật và khởi động lại NetworkManager
+
 ```sudo systemctl enable NetworkManager```
+
 ```sudo systemctl restart NetworkManager```
 
 Ép NetworkManager nhận lại card mạng
+
 ```sudo nmcli networking off```
+
 ```sudo nmcli networking on```
 
 
