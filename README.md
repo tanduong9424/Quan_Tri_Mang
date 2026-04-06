@@ -81,6 +81,10 @@ systemctl disable firewalld
 Thêm dòng sau vào
 ```.host:/shareCetOS   /home/node1/Desktop/sharefolderWin    fuse.vmhgfs-fuse    defaults,allow_other,uid=1000     0    0```
 
+Liệt kê các dịch vụ đang chạy trên port 80
+```sudo lsof -i :80```
+
+
 # Cấu hình khi CentOS bị mất, lỗi card mạng:
 ```sudo gedit /etc/sysconfig/network-scripts/ifcfg-ens33```
 Xóa 2 dòng này nếu có
@@ -108,9 +112,3 @@ Bật và khởi động lại NetworkManager
 ```sudo nmcli networking off```
 
 ```sudo nmcli networking on```
-
-
-
-
-```sudo lsof -i :80```
-
