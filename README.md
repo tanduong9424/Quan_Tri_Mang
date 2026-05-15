@@ -69,37 +69,40 @@ Chuyển **SELINUX=enforcing** ->  **SELINUX=disabled**
 ```sudo reboot```
 
 # 5. Mount share folder giữa máy thật và ảo
-``vmware-hgfsclient
-sudo vmhgfs-fuse .host:/shareCetOS /home/node2/Desktop/sharefolderWin -o allow_other -o uid=1000
-cd /home/node2/Desktop/sharefolderWin
-ls -la``
+```vmware-hgfsclient```
+
+```sudo vmhgfs-fuse .host:/shareCetOS /home/node2/Desktop/sharefolderWin -o allow_other -o uid=1000```
+
+```cd /home/node2/Desktop/sharefolderWin```
+
+```ls -la```
 
 ```gedit /etc/fstab```
 
-Thêm dòng sau vào
+**Thêm dòng sau vào**
 ```.host:/shareCetOS   /home/node1/Desktop/sharefolderWin    fuse.vmhgfs-fuse    defaults,allow_other,uid=1000     0    0```
 
 # 6. Liệt kê các dịch vụ đang chạy trên port 80
 ```sudo lsof -i :80```
 
-
-# 7. Cấu hình khi CentOS bị mất, lỗi card mạng:
+# 7. Cấu hình khi CentOS bị mất, lỗi card mạng
 ```sudo gedit /etc/sysconfig/network-scripts/ifcfg-ens33```
-Xóa 2 dòng này nếu có
-* HWADDR=
-* UUID=
-Và đảm bảo 3 dòng này có đúng giá trị
-* BOOTPROTO=dhcp
-* ONBOOT=yes
-* NM_CONTROLLED=yes
-Save và chạy lệnh
-Tắt dịch vụ network cũ (tránh xung đột)
+**Xóa 2 dòng này nếu có**
+``HWADDR=
+UUID=``
+
+**Và đảm bảo 3 dòng này có đúng giá trị**
+``BOOTPROTO=dhcp
+ONBOOT=yes
+NM_CONTROLLED=yes``
+
+**Tắt dịch vụ network cũ (tránh xung đột)**
 
 ```sudo systemctl stop network```
 
 ```sudo systemctl disable network```
 
-# 8. Bật và khởi động lại NetworkManager
+** Bật và khởi động lại NetworkManager**
 
 ```sudo systemctl enable NetworkManager```
 
@@ -109,12 +112,15 @@ Tắt dịch vụ network cũ (tránh xung đột)
 
 ```sudo nmcli networking off```
 
-# 9. Cloudflare Tunnel để public dịch vụ từ máy local mà không cần IP public**
-``sudo wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm
-sudo rpm -ivh cloudflared-linux-x86_64.rpm
-cloudflared --version
-cloudflared tunnel --url localhost:8000 (chỉnh lại port cho đúng với dịch vụ)
-``
+# 8. Cloudflare Tunnel để public dịch vụ từ máy local mà không cần IP public**
+```sudo wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm```
+
+```sudo rpm -ivh cloudflared-linux-x86_64.rpm```
+
+```cloudflared --version```
+
+```cloudflared tunnel --url localhost:8000``` (chỉnh lại port cho đúng với dịch vụ)
+
 **Chú ý, domain sẽ là trycloudflare.com nên sẽ bị google đánh dấu là Dangerous Site**
 
 ```sudo nmcli networking on```
