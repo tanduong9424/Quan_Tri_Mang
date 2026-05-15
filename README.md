@@ -1,7 +1,7 @@
-# Tải ISO CentOS
+# 1. Tải ISO CentOS
 Tại **http://centos-hcm.viettelidc.com.vn/7/isos/x86_64/**
 
-# Cấu hình lại để update, cài đặt các gói cần thiết
+# 2. Cấu hình lại để update, cài đặt các gói cần thiết trên CentOS
 ```gedit /etc/yum.repos.d/CentOS-Base.repo```
 * Uncomment các dòng bắt đầu bằng #baseurl -> baseurl
 * Thay đổi đường dẫn từ ```http://mirrorlist.centos.org``` -> ````https://vault.centos.org````
@@ -56,36 +56,34 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
 
 ```
 
-# Tắt tường lửa
-```
+# 3. Tắt tường lửa
+``
 systemctl stop firewalld
 systemctl disable firewalld
-```
+``
 
-# Tắt SeLinux
+# 4. Tắt SeLinux
 
 ```gedit /etc/selinux/config```
-```SELINUX=enforcing``` ->  ```SELINUX=disabled```
+Chuyển **SELINUX=enforcing** ->  **SELINUX=disabled**
 ```sudo reboot```
 
-# Mount share folder giữa máy thật và ảo
-```vmware-hgfsclient```
-
-```sudo vmhgfs-fuse .host:/shareCetOS /home/node2/Desktop/sharefolderWin -o allow_other -o uid=1000```
-
-```cd /home/node2/Desktop/sharefolderWin```
-```ls -la```
+# 5. Mount share folder giữa máy thật và ảo
+``vmware-hgfsclient
+sudo vmhgfs-fuse .host:/shareCetOS /home/node2/Desktop/sharefolderWin -o allow_other -o uid=1000
+cd /home/node2/Desktop/sharefolderWin
+ls -la``
 
 ```gedit /etc/fstab```
 
 Thêm dòng sau vào
 ```.host:/shareCetOS   /home/node1/Desktop/sharefolderWin    fuse.vmhgfs-fuse    defaults,allow_other,uid=1000     0    0```
 
-Liệt kê các dịch vụ đang chạy trên port 80
+# 6. Liệt kê các dịch vụ đang chạy trên port 80
 ```sudo lsof -i :80```
 
 
-# Cấu hình khi CentOS bị mất, lỗi card mạng:
+# 7. Cấu hình khi CentOS bị mất, lỗi card mạng:
 ```sudo gedit /etc/sysconfig/network-scripts/ifcfg-ens33```
 Xóa 2 dòng này nếu có
 * HWADDR=
@@ -101,14 +99,22 @@ Tắt dịch vụ network cũ (tránh xung đột)
 
 ```sudo systemctl disable network```
 
-Bật và khởi động lại NetworkManager
+# 8. Bật và khởi động lại NetworkManager
 
 ```sudo systemctl enable NetworkManager```
 
 ```sudo systemctl restart NetworkManager```
 
-Ép NetworkManager nhận lại card mạng
+**Ép NetworkManager nhận lại card mạng**
 
 ```sudo nmcli networking off```
+
+# 9. Cloudflare Tunnel để public dịch vụ từ máy local mà không cần IP public**
+``sudo wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm
+sudo rpm -ivh cloudflared-linux-x86_64.rpm
+cloudflared --version
+cloudflared tunnel --url localhost:8000 (chỉnh lại port cho đúng với dịch vụ)
+``
+**Chú ý, domain sẽ là trycloudflare.com nên sẽ bị google đánh dấu là Dangerous Site**
 
 ```sudo nmcli networking on```
