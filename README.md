@@ -7,6 +7,9 @@ Tại **http://centos-hcm.viettelidc.com.vn/7/isos/x86_64/**
 * Thay đổi đường dẫn từ ```http://mirrorlist.centos.org``` -> ````https://vault.centos.org````
 * Thay đổi đường dẫn từ ```http://mirror.centos.org``` -> ```https://vault.centos.org```
 * Update lại gói yum bằng ```yum update -y``` và tiến hành reboot
+* ```cat << 'EOF' > /etc/yum.repos.d/CentOS-Base.repo
+* ...
+* EOF```
 * Hoặc đơn giản hơn là xóa toàn bộ nội dung trong ``/etc/yum.repos.d/CentOS-Base.repo`` và copy nội dung dưới **save** và ``yum update -y``
   
 ```
