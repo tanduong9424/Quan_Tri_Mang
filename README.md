@@ -102,7 +102,7 @@ NM_CONTROLLED=yes``
 
 ```sudo systemctl disable network```
 
-** Bật và khởi động lại NetworkManager**
+**Bật và khởi động lại NetworkManager**
 
 ```sudo systemctl enable NetworkManager```
 
@@ -112,7 +112,7 @@ NM_CONTROLLED=yes``
 
 ```sudo nmcli networking off```
 
-# 8. Cloudflare Tunnel để public dịch vụ từ máy local mà không cần IP public**
+# 8. Cloudflare Tunnel để public dịch vụ từ máy local mà không cần IP public
 ```sudo wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm```
 
 ```sudo rpm -ivh cloudflared-linux-x86_64.rpm```
